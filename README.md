@@ -1,5 +1,7 @@
 # INCOSE Requirements skill
 
+![INCOSE Requirements skill: a person and a robot turn a need into a checked requirement](assets/logo.jpg)
+
 This skill helps an AI coding agent write and test needs and requirements. It uses the needs-and-requirements model of INCOSE, the International Council on Systems Engineering. It also uses the 42 rules of the INCOSE Guide to Writing Requirements (GtWR) v4. The skill works with Claude Code and Codex. The current version is 1.1.0.
 
 ## What the skill does
