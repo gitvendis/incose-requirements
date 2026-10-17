@@ -15,7 +15,7 @@ description: |
 license: Apache-2.0
 compatibility: claude-code codex
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   source: "INCOSE Guide to Writing Requirements v4 summary sheet, INCOSE-TP-2010-006-04, June 2023"
 ---
 
@@ -34,16 +34,29 @@ them. It has three modes:
 
 ## The three levels
 
-The INCOSE Needs and Requirements Manual (NRM) separates three kinds of
-statement. Use these terms. Do not use "hard" and "soft" requirements.
+The life-cycle figure of the summary sheet shows three kinds of statement.
+The INCOSE Needs and Requirements Manual (NRM) defines them in full. Use these
+terms. Each level gets its own verification (is the statement defined
+correctly?) and validation (is it the right statement?), and the realized
+system is checked against the first two levels.
 
-| Level | What it states | Pattern | Checked by | Who changes it |
-|---|---|---|---|---|
-| **Need statement** (ID `N-…`) | An expectation that the stakeholders agreed: what the entity must do or be, from their point of view. It contains no solution. | `The <stakeholders> need the <entity> to <capability> <condition>.` | **Validation:** are we building the right thing? | Only the stakeholders, through the owner |
-| **Design input requirement** (ID `DIR-…`) | A verifiable obligation on the entity, transformed from one or more needs. It is still free of design choices, unless a rationale justifies a constraint. | `When <condition>, the <entity> shall <action> <object> <performance with range>.` | **Verification:** did we build it right? | The owner, with a recorded change and its effect on the parent need |
-| **Design output specification** (ID `DOS-…`) | What a chosen architecture or design must do to meet the design input requirements: the specification for one candidate or element. | The same requirement pattern, with the design element as the subject | Design verification | The design owner. A design change replaces it. |
+| Level | What it states | Verification and validation | Who changes it |
+|---|---|---|---|
+| **Need statement** (ID `N-…`) | An agreed expectation for the entity to perform a function or have a quality, from the stakeholders' point of view. It contains no solution. | Needs verification: are the needs defined correctly? Needs validation: are we building the right thing? The realized system is **validated** against the needs. | Only the stakeholders, through the owner |
+| **Design input requirement** (ID `DIR-…`) | An agreed, verifiable obligation on the entity, transformed from one or more needs. It is still free of design choices, unless a rationale justifies a constraint (GtWR R31). | Requirements verification: are the requirements defined correctly? Requirements validation: are we building the right thing? The realized system is **verified** against the design input requirements. | The owner, with a recorded change and its effect on the parent need |
+| **Design output specification** (ID `DOS-…`) | What a chosen architecture or design must do to meet the design input requirements: the specification for one candidate or element. | Design verification: did we design it right? Design validation: do we have the right design? | The design owner. A design change replaces it. |
 
-Rules that follow from the levels:
+Skill conventions, not from the summary sheet (the sheet refers to the
+patterns in Appendix C of the full Guide):
+
+- Need pattern: `The <stakeholders> need the <entity> to <capability> <condition>.`
+- Requirement pattern: `When <condition>, the <entity> shall <action> <object> <performance with range>.`
+  A design output specification uses the same pattern with the design
+  element as the subject.
+- Do not label requirements "hard" or "soft". Show flexibility with the level
+  and the attributes instead (see `references/levels-and-attributes.md`).
+
+Rules that follow from the levels (skill guidance, based on the NRM model):
 
 - A need does not change because a design is hard. A design input requirement
   changes only with a recorded reason. A design output specification changes
@@ -85,15 +98,14 @@ Ask these questions in order:
    machine output and `--terms <file>` for the project's multi-word defined
    terms. The checker finds wording problems only. Its findings are
    candidates, not verdicts.
-2. Then judge the rules that need context (see `references/rules.md`):
-   C1 necessary, C2 appropriate to level, C6 feasible, C8 correct against the
-   parent, R4 defined terms, R23 reference to an interface definition or
-   model, R27 explicit conditions, R31 solution free, R33 range of values,
-   R34 measurable performance.
-3. Check the set, not only the statement: C10 complete, C11 consistent (no
-   overlap, same units, same terms), C12 feasible together, R30 each statement
-   once.
-4. Report in this form:
+2. Then judge each rule that `references/rules.md` does not mark "Auto":
+   R3, R4, R11, R12-R14, R22, R23, R25, R27, R28, R29, R31, R33 and R36-R40.
+   Also confirm or reject each checker finding in context.
+3. Judge each characteristic of the statement, C1 to C9. Give C7 verifiable
+   and C2 appropriate to level the most care, because no checker finds them.
+4. Check the set, not only the statement: C10 to C15, R30 each statement
+   once, R41 related entries together and R42 structured set.
+5. Report in this form:
    - level and proposed ID;
    - the rewritten statement;
    - a table of findings: rule, problem, fix. Cite rules as `GtWR R7`, so
@@ -101,7 +113,9 @@ Ask these questions in order:
    - parent (A2) and source (A3);
    - missing minimum attributes (see `references/levels-and-attributes.md`);
    - values that are not yet known, marked **TBD** (to be determined) or
-     **TBR** (to be resolved: a proposed value that is not agreed).
+     **TBR** (to be resolved: a proposed value that is not agreed);
+   - the proposed statement verification status (A28) and statement
+     validation status (A29).
 
 ## Session behavior
 
@@ -145,13 +159,16 @@ When evidence shows that a child is infeasible, too costly or too complex:
 
 ## Source and notice
 
-The rules, characteristics, attribute names and level definitions in this skill
-and its `references/` folder are paraphrased from the *INCOSE Guide to Writing
-Requirements v4 – Summary Sheet* (INCOSE-TP-2010-006-04, June 2023), by the
-INCOSE Requirements Working Group. The life-cycle figure in that sheet is by
-M. Ryan and L. Wheatcraft. Copyright (c) 2023 by INCOSE. The summary sheet
-grants permission to reproduce it and to make derivative works, with
-attribution and its copyright notice. Get the full Guide, the Needs and
-Requirements Manual and the Guide to Needs and Requirements from the INCOSE
-store. This skill paraphrases only the summary sheet. It does not use the full
-Guide or the NRM, and it is not an INCOSE product.
+The rules, characteristics, attribute names, definitions and the
+verification and validation questions in this skill and its `references/`
+folder are paraphrased from the *INCOSE Guide to Writing Requirements v4 –
+Summary Sheet* (INCOSE-TP-2010-006-04, June 2023), by the INCOSE Requirements
+Working Group. The life-cycle figure in that sheet is by M. Ryan and
+L. Wheatcraft. Copyright (c) 2023 by INCOSE. The `NOTICE` file contains the
+full INCOSE copyright notice, which the sheet requires in each derivative work.
+
+The statement patterns, the ID scheme, the procedures, the register columns,
+the worked example and each item marked "Skill convention" are guidance from
+this skill. They are not INCOSE text. The skill does not quote the full Guide
+or the Needs and Requirements Manual. Get those from the INCOSE store. This
+skill is not an INCOSE product.

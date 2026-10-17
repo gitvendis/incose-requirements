@@ -1,14 +1,32 @@
 INCOSE Requirements skill
 Copyright 2026 Shawn Venditti
 
-Licensed under the Apache License, Version 2.0. See LICENSE.
+Licensed under the Apache License, Version 2.0. See LICENSE. The Apache
+License covers only the original work in this project. It grants no rights to
+INCOSE material.
 
-The rules, characteristics, attribute names and level definitions in this
-project are paraphrased from the INCOSE Guide to Writing Requirements v4 -
-Summary Sheet (INCOSE-TP-2010-006-04, June 2023), by the INCOSE Requirements
-Working Group. The life-cycle figure in that sheet is by M. Ryan and
-L. Wheatcraft. Copyright (c) 2023 by INCOSE. The summary sheet grants
-permission to reproduce it and to make derivative works, with attribution and
-its copyright notice. The Apache License covers only the original work in this
-project. It grants no rights to INCOSE material. This project is not an INCOSE
-product.
+This project is a derivative work of the INCOSE Guide to Writing Requirements
+v4 - Summary Sheet (INCOSE-TP-2010-006-04, June 2023), by the INCOSE
+Requirements Working Group. The rules, characteristics, attribute names,
+definitions and verification and validation questions are paraphrased from
+that summary sheet. The life-cycle figure of the summary sheet was created by
+M. Ryan and L. Wheatcraft. This project is not an INCOSE product.
+
+The copyright notice of the summary sheet follows, as that notice requires:
+
+------------------------------------------------------------------------------
+COPYRIGHT INFORMATION
+The Guide to Writing Requirements is an INCOSE Technical Product prepared by
+the International Council on Systems Engineering (INCOSE). It, as well as this
+summary, is approved by the INCOSE Technical Operations Leadership for release
+as an INCOSE Technical Product.
+Copyright (c) 2023 by INCOSE, subject to the following restrictions:
+Use. Given this is summary of the Guide for Writing Requirements, permission to
+reproduce and use this summary is granted, with attribution to INCOSE and the
+original author(s) where practical, provided this copyright notice is included
+with all reproductions and derivative works.
+Readers of this summary are encouraged to obtain a copy of the full INCOSE
+Guide to Writing Requirements from the INCOSE store.
+INCOSE Publications Office, 7670 Opportunity Road, Suite 220 San Diego, CA
+92111-2222 US
+------------------------------------------------------------------------------

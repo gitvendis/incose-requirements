@@ -1,13 +1,16 @@
 # Levels, attributes and a worked example
 
 Paraphrased from the INCOSE Guide to Writing Requirements v4 summary sheet
-(INCOSE-TP-2010-006-04, June 2023). Copyright (c) 2023 by INCOSE. See the notice
-in `../SKILL.md`.
+(INCOSE-TP-2010-006-04, June 2023). Copyright (c) 2023 by INCOSE. See the
+`NOTICE` file for the full copyright notice. Text marked "Skill convention" is
+guidance from this skill, not from the summary sheet.
 
 ## Definitions
 
-- **Entity:** one thing that a need or requirement applies to. Examples: a
-  system, a subsystem, a software library, an operator role.
+- **Entity:** one item that a concept, need or requirement applies to.
+  Examples: an organization, a business unit, a project, a supplier, a service,
+  a procedure, the system of interest (system, subsystem or system element), a
+  product, a process, or a class of stakeholder such as users or operators.
 - **Lifecycle concepts:** how the organization expects to acquire, build,
   verify, operate, maintain and retire the entity.
 - **Need statement:** a formal transformation of sources or lifecycle concepts
@@ -26,9 +29,22 @@ in `../SKILL.md`.
 The life-cycle flow: stakeholder expectations → lifecycle concepts and needs
 definition → integrated set of needs → design input requirements definition →
 design input requirements → architecture and design definition → design output
-specifications → implementation and integration → realized element. Each step
-has a verification check ("did we define, design or build it correctly?") and
-a validation check ("is it still the right thing?").
+specifications → implementation and integration → realized element.
+
+Each artifact has its own verification and validation. Verification asks
+whether the artifact was defined, designed or built correctly. Validation asks
+whether it is still the right thing. The summary sheet names these checks:
+
+| Artifact | Verification | Validation |
+|---|---|---|
+| Integrated set of needs | Needs verification: are the needs defined correctly? | Needs validation: are we building the right thing? |
+| Design input requirements | Requirements verification: are the requirements defined correctly? | Requirements validation: are we building the right thing? |
+| Design output specifications | Design verification: did we design it right? | Design validation: do we have the right design? |
+| Realized system | System verification against the design input requirements: did we build it right? | System validation against the needs: did we build the right thing? |
+
+Attributes A28 and A29 record the verification and validation status of the
+statement itself. Attributes A13 and A14 record the results for the realized
+system.
 
 ## Attributes
 
@@ -45,8 +61,8 @@ entry.
 
 ### Suggested register columns
 
-If the project has no register yet, propose these columns. They cover the
-minimum attribute set.
+Skill convention: if the project has no register yet, propose these columns.
+They cover each attribute that the summary sheet marks with an asterisk.
 
 | Column | Attributes | Notes |
 |---|---|---|
@@ -55,19 +71,22 @@ minimum attribute set.
 | Statement | — | One statement in the agreed pattern. Values not yet agreed are marked TBD or TBR. |
 | Rationale | A1 | Why the entry exists. Put the purpose here, not in the statement (R20). |
 | Parent and source | A2, A3, A32 | Parent IDs; source document, decision or owner direction with date; interface definition reference |
+| Allocation | A5 | The child entity or the budget share that the entry is allocated to |
 | Verification or validation | A6, A7, A8, A9 | Success criterion, method (test, analysis, inspection, demonstration), who does it |
 | Owner and author | A19, A17 | |
 | Priority, criticality, risk | A34, A35, A36, A38 | Mark key driving entries |
 | Stability | A26 | `stable` or `volatile` |
+| Statement verification and validation | A28, A29 | Is the statement defined correctly against the rules? Is it the right statement against its parent? `open`, `passed` or `failed`, with date |
 | Status | A30, A24, A25 | `proposed`, `agreed` (with the owner's date), `baselined`, `retired` |
 
-Keep verification results (A13, A14, A28) and implementation status (A31) in
-the record that owns them. Link to them. Do not copy them.
+Keep the system verification and validation results (A13, A14) and the
+implementation status (A31) in the record that owns them. Link to them. Do not
+copy them.
 
 ## How flexibility is managed
 
-INCOSE does not use "hard" and "soft" requirements. Flexibility comes from two
-things:
+Skill convention: do not label requirements "hard" or "soft". The summary
+sheet does not use those terms. Show flexibility with two things:
 
 1. **Level.** A need is the stable anchor. A design input requirement changes
    only with a recorded reason. A design output specification changes with the

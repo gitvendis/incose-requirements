@@ -1,6 +1,6 @@
 # INCOSE Requirements skill
 
-This skill helps an AI coding agent write and test needs and requirements. It uses the needs-and-requirements model of INCOSE, the International Council on Systems Engineering. It also uses the 42 rules of the INCOSE Guide to Writing Requirements (GtWR) v4. The skill works with Claude Code and Codex. Version 1.0.0 is the first release.
+This skill helps an AI coding agent write and test needs and requirements. It uses the needs-and-requirements model of INCOSE, the International Council on Systems Engineering. It also uses the 42 rules of the INCOSE Guide to Writing Requirements (GtWR) v4. The skill works with Claude Code and Codex. The current version is 1.1.0.
 
 ## What the skill does
 
@@ -45,6 +45,6 @@ The skill has four files. The agent reads `SKILL.md` first and opens the other f
 
 ## Source and license
 
-The rules are paraphrased from the INCOSE Guide to Writing Requirements v4 Summary Sheet (INCOSE-TP-2010-006-04, June 2023). That sheet is Copyright (c) 2023 by INCOSE, and it permits derivative works with attribution. This project is not an INCOSE product. For the full Guide and the Needs and Requirements Manual, go to the INCOSE store.
+The rules are paraphrased from the INCOSE Guide to Writing Requirements v4 Summary Sheet (INCOSE-TP-2010-006-04, June 2023). That sheet is Copyright (c) 2023 by INCOSE. Its copyright notice must stay with each derivative work, so `NOTICE` contains the notice in full. The statement patterns, procedures and examples are guidance from this project. This project is not an INCOSE product. For the full Guide and the Needs and Requirements Manual, go to the INCOSE store.
 
 This project is released under the Apache License 2.0. Read `LICENSE` and `NOTICE` for the terms.
