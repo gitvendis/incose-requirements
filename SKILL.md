@@ -15,15 +15,15 @@ description: |
 license: Apache-2.0
 compatibility: claude-code codex
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   source: "INCOSE Guide to Writing Requirements v4 summary sheet, INCOSE-TP-2010-006-04, June 2023"
 ---
 
 # INCOSE needs and requirements
 
 This skill turns statements from the owner, the plan and the design records into
-well-formed needs and requirements, and keeps the parent-child trace between
-them. It has three modes:
+well-formed needs and requirements, and preserves the meaning of their trace
+relations. It has three modes:
 
 1. **Check.** Classify a statement, test it against the rules, and propose a
    rewrite. Use this mode during a session when the user says something that
@@ -32,19 +32,20 @@ them. It has three modes:
 3. **Change.** Revise a derived requirement when evidence shows that it is
    infeasible, too costly or too complex. Keep its parent unchanged.
 
-## The three levels
+## Artifact kind and entity level
 
-The life-cycle figure of the summary sheet shows three kinds of statement.
-The INCOSE Needs and Requirements Manual (NRM) defines them in full. Use these
-terms. Each level gets its own verification (is the statement defined
-correctly?) and validation (is it the right statement?), and the realized
-system is checked against the first two levels.
+Need statements, design input requirements and design output specifications
+are artifact kinds in the summary sheet's life-cycle figure. They are not
+three levels of an architecture. Record the entity and its architectural or
+organizational level separately. A system, subsystem, element or organization
+can have needs and design input requirements appropriate to its own level
+(GtWR C2). A module name alone does not make a statement a design output.
 
-| Level | What it states | Verification and validation | Who changes it |
+| Artifact kind | What it states | Verification and validation | Who changes it |
 |---|---|---|---|
-| **Need statement** (ID `N-…`) | An agreed expectation for the entity to perform a function or have a quality, from the stakeholders' point of view. It contains no solution. | Needs verification: are the needs defined correctly? Needs validation: are we building the right thing? The realized system is **validated** against the needs. | Only the stakeholders, through the owner |
-| **Design input requirement** (ID `DIR-…`) | An agreed, verifiable obligation on the entity, transformed from one or more needs. It is still free of design choices, unless a rationale justifies a constraint (GtWR R31). | Requirements verification: are the requirements defined correctly? Requirements validation: are we building the right thing? The realized system is **verified** against the design input requirements. | The owner, with a recorded change and its effect on the parent need |
-| **Design output specification** (ID `DOS-…`) | What a chosen architecture or design must do to meet the design input requirements: the specification for one candidate or element. | Design verification: did we design it right? Design validation: do we have the right design? | The design owner. A design change replaces it. |
+| **Need statement** (ID `N-…`) | An agreed stakeholder expectation for an entity to perform a function or have a quality within constraints. Avoid implementation detail unless a recorded rationale justifies a design constraint (GtWR R31). | Needs verification: are the needs defined correctly? Needs validation: are we building the right thing? The realized system is **validated** against the needs. | Only the stakeholders, through the owner |
+| **Design input requirement** (ID `DIR-…`) | An agreed, verifiable obligation transformed from sources, needs or higher-level requirements for the entity. Avoid implementation detail unless a recorded rationale justifies a design constraint (GtWR R31). | Requirements verification: are the requirements defined correctly? Requirements validation: are we building the right thing? The realized system is **verified** against the design input requirements. | The owner, with a recorded change and its effects |
+| **Design output specification** (ID `DOS-…`) | An output of a chosen architecture or design that specifies a candidate or element to satisfy design input requirements. | Design verification: did we design it right? Design validation: do we have the right design? | The design owner, subject to applicable approved requirements and decisions |
 
 Skill conventions, not from the summary sheet (the sheet refers to the
 patterns in Appendix C of the full Guide):
@@ -53,42 +54,55 @@ patterns in Appendix C of the full Guide):
 - Requirement pattern: `When <condition>, the <entity> shall <action> <object> <performance with range>.`
   A design output specification uses the same pattern with the design
   element as the subject.
-- Do not label requirements "hard" or "soft". Show flexibility with the level
+- Do not label requirements "hard" or "soft". Show flexibility with the artifact kind
   and the attributes instead (see `references/levels-and-attributes.md`).
 
-Rules that follow from the levels (skill guidance, based on the NRM model):
+## Trace relations
 
-- A need does not change because a design is hard. A design input requirement
-  changes only with a recorded reason. A design output specification changes
-  whenever the design changes.
-- "Derived requirement" means a child that is traced to a parent. A design input
-  requirement is derived from needs. A design output specification is derived
-  from design input requirements through an architecture decision. A child at
-  the next level of the architecture (a subsystem) gets its own needs and
-  design input requirements, allocated from the parent.
-- Source requirements from outside the project (a customer specification, a
-  contract or a standard) keep their source identity. Never rewrite them.
-  Trace project needs to them as attribute A3, trace to source.
+Skill convention: use typed relations rather than treating every link as
+parent-child derivation. The vocabulary below is skill guidance, not a
+prescribed INCOSE schema. Record the relation, its direction and target ID or
+revision in the owning record; do not create a parallel register.
+
+- **Source:** the originating document or owner direction (A3).
+- **Derivation:** a child obligation transformed from a parent need or
+  requirement (A2), with rationale that preserves the parent's intent.
+- **Allocation:** assignment of an obligation or performance budget to an
+  entity (A5). Allocation is not, by itself, a newly agreed need.
+- **Satisfaction:** a design output's claimed fulfillment of a requirement.
+  A link alone does not prove fulfillment.
+- **Decision:** the architecture or design decision governing a design output.
+- **Dependency:** an interface or dependent peer (A32, A33).
+- **Verification/validation:** criteria and evidence assessing a specified
+  obligation or need; retain the distinction between the two activities.
+- **Supersession:** the recorded replacement relationship between revisions
+  or decisions, preserving their lifecycle and approval history.
+
+A need does not change because a design is hard. A design change still has to
+meet applicable approved obligations. Source requirements from outside the
+project keep their source identity and wording. Trace project entries to them
+through A3. The conceptual ability to define subsystem needs does not change
+the owner-approved entity scope or authorize new agreed entries.
 
 ## Classify a statement
 
-Ask these questions in order:
+First identify the entity, its architectural or organizational level, the
+source and approval state. Then classify the statement by its role:
 
-1. Does it say what a stakeholder expects, in the stakeholder's terms, with no
-   design? It is a **need**.
-2. Does it oblige the entity (a system, a subsystem, a software library) to a
-   measurable result, independent of which design is chosen? It is a **design
-   input requirement**.
-3. Does it name a design element, a candidate product, a module or a
-   technique? It is a **design output specification**, unless a rationale
-   makes it a constraint at the design input level. Rule R31 allows such a
-   constraint only with a rationale.
-4. Is it a test threshold, a gate or a pass mark? It is usually the
-   success criterion (attribute A6) of a design input requirement, not a
-   separate requirement. A gate that has its own obligation becomes a design
-   input requirement.
-5. Is it a plan step, a task or a decision about who does what? It is not a
-   requirement. It belongs in the project plan or a decision record.
+1. A stakeholder expectation for the entity is a **need**. A documented
+   rationale can justify a design constraint here under GtWR R31.
+2. A verifiable obligation supplied as input to design for that entity is a
+   **design input requirement**. It may be derived from sources, needs or
+   higher-level requirements, including allocation to a subsystem. GtWR R31
+   permits a design constraint here only with a documented rationale.
+3. A specification produced by a chosen architecture or design is a **design
+   output specification**. Judge its role and provenance; naming a module,
+   technique or candidate product is insufficient to determine its kind.
+4. A test threshold, gate or pass mark is often a success criterion (A6).
+   Determine which obligation it assesses. A gate with its own obligation may
+   be a requirement. Do not turn a proposed criterion into an agreed value.
+5. A plan step or task belongs in the project plan; an architecture decision
+   belongs in a decision record. Neither automatically creates a product requirement.
 
 ## Check procedure
 
@@ -98,19 +112,21 @@ Ask these questions in order:
    machine output and `--terms <file>` for the project's multi-word defined
    terms. The checker finds wording problems only. Its findings are
    candidates, not verdicts.
-2. Then judge each rule that `references/rules.md` does not mark "Auto":
-   R3, R4, R11, R12-R14, R22, R23, R25, R27, R28, R29, R31, R33 and R36-R40.
-   Also confirm or reject each checker finding in context.
+2. Review every applicable GtWR R1-R42 in `references/rules.md` in context,
+   including rules marked "Auto" when the checker reports no finding. Those
+   checks are partial heuristics; silence is not a pass. Confirm or reject
+   findings, record justified not-applicable dispositions, and identify any
+   rules left unreviewed. Do not claim full rule coverage from lint alone.
 3. Judge each characteristic of the statement, C1 to C9. Give C7 verifiable
    and C2 appropriate to level the most care, because no checker finds them.
 4. Check the set, not only the statement: C10 to C15, R30 each statement
    once, R41 related entries together and R42 structured set.
 5. Report in this form:
-   - level and proposed ID;
+   - artifact kind, entity, architectural or organizational level and proposed ID;
    - the rewritten statement;
-   - a table of findings: rule, problem, fix. Cite rules as `GtWR R7`, so
-     that a reader does not confuse them with other IDs such as risk numbers;
-   - parent (A2) and source (A3);
+   - a table of findings: rule, problem, fix. Cite rules as `GtWR R7`,
+     so that a reader does not confuse them with other IDs such as risk numbers;
+   - typed trace relations, including parent (A2), source (A3) and allocation (A5);
    - missing minimum attributes (see `references/levels-and-attributes.md`);
    - values that are not yet known, marked **TBD** (to be determined) or
      **TBR** (to be resolved: a proposed value that is not agreed);
@@ -119,14 +135,16 @@ Ask these questions in order:
 
 ## Session behavior
 
-- When the user says something requirement-like, give a short check: level,
+- When the user says something requirement-like, give a short check: artifact kind,
   rewrite and the top findings. Do not stop the user's task to do this. Put a
   full check in the report or the register edit.
 - Do not check casual speech, questions or plans that are not stated as
   obligations.
 - An owner decision comes only from the user in chat. Record its date. A
   statement that an agent drafted "on the owner's behalf" stays **proposed**
-  until the owner agrees to it.
+  until the owner agrees to it. Preserve the originating chat reference and
+  reviewed statement revision. Apply authorization already given for that
+  revision and scope; do not ask for the same approval again.
 - Never edit the canonical register to make a check pass. Propose the edit, and
   apply it when the user asks.
 
@@ -138,9 +156,12 @@ When evidence shows that a child is infeasible, too costly or too complex:
 2. Keep the parent. Propose another child that still meets the parent, or a
    new value for a TBR.
 3. If no child can meet the parent, say that the **parent is at risk** and
-   send it to the owner. Never weaken a need to fit a design.
-4. Update the owning row in place. Keep the ID. Record the old value, the new
-   value, the reason and the date. Do not add a second register.
+   route the decision to the owner. Never weaken a need to fit a design.
+4. Follow the project's change workflow for authority, revision history, impact
+   review, evidence applicability and closure. Apply already authorized changes
+   to the owning row in place. Keep the ID and the prior approved revision; do
+   not transfer its approval to changed meaning. Record the old value, the new
+   value, the reason, the date, unresolved impacts and residual work there.
 5. Set attribute A26, stability, to `volatile` for a child that changes often.
 
 ## Project rules that apply
@@ -164,8 +185,9 @@ verification and validation questions in this skill and its `references/`
 folder are paraphrased from the *INCOSE Guide to Writing Requirements v4 –
 Summary Sheet* (INCOSE-TP-2010-006-04, June 2023), by the INCOSE Requirements
 Working Group. The life-cycle figure in that sheet is by M. Ryan and
-L. Wheatcraft. Copyright (c) 2023 by INCOSE. The `NOTICE` file contains the
-full INCOSE copyright notice, which the sheet requires in each derivative work.
+L. Wheatcraft. Copyright (c) 2023 by INCOSE. The `NOTICE` file in this skill
+folder contains the full INCOSE copyright notice, which the sheet requires in
+each derivative work.
 
 The statement patterns, the ID scheme, the procedures, the register columns,
 the worked example and each item marked "Skill convention" are guidance from

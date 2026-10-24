@@ -6,8 +6,9 @@ Paraphrased from the INCOSE Guide to Writing Requirements v4 summary sheet
 source, so findings can cite them.
 
 Text marked "Skill convention" is guidance from this skill, not from the
-summary sheet. "Auto" marks the rules that `scripts/req_lint.py` finds. The
-checker finds candidates only. Judge each one in context.
+summary sheet. "Auto" marks rules for which `scripts/req_lint.py` has partial
+heuristics. Review every applicable rule in context, including those with no
+automated finding. Neither an empty finding list nor this table proves conformance.
 
 ## Characteristics of one statement (C1-C9)
 
@@ -39,7 +40,7 @@ checker finds candidates only. Judge each one in context.
 | ID | Name | What to check | Auto |
 |---|---|---|---|
 | R1 | Structured Statements | The statement follows one of the agreed patterns. Skill convention: a requirement uses "shall" and a need uses "need" (patterns in `../SKILL.md`). | yes |
-| R2 | Active Voice | The responsible entity is the subject. Flag "shall be <verb>ed by". | yes |
+| R2 | Active Voice | The responsible entity is the subject. The checker flags some "shall be <verb>ed by" forms; other passive constructions still need review. | yes |
 | R3 | Appropriate Subject-Verb | The subject and verb suit the entity that the statement refers to. | |
 | R4 | Defined Terms | Each term is defined in the glossary or data dictionary. | |
 | R5 | Definite Articles | Use "the", not "a". | yes |
@@ -69,7 +70,7 @@ checker finds candidates only. Judge each one in context.
 | R31 | Solution Free | No implementation unless a rationale justifies the constraint on the design. | |
 | R32 | Universal Qualification | Use "each" instead of "all", "any" or "both" for universal quantification. | yes |
 | R33 | Range of Values | Each quantity has a range of values, suited to the entity, against which the entity is verified or validated. | |
-| R34 | Measurable Performance | Each performance target is specific and measurable. Skill convention: the checker flags words such as fast, high, minimize and optimize when the statement has no number. | yes |
+| R34 | Measurable Performance | Each performance target is specific and measurable. Skill convention: the checker flags words such as fast, high, minimize and optimize even when an unrelated number occurs elsewhere. A finding still needs contextual review for a defined, measurable target. | yes |
 | R35 | Temporal Dependencies | Define timing explicitly. Avoid eventually, until, before, after, as, once, earliest, latest, instantaneous, simultaneous, at last. | yes |
 | R36 | Consistent Terms and Units | Each term and unit matches the project ontology across the sets, the models and the other artifacts. | |
 | R37 | Acronyms | Each acronym is used the same way across the sets, the models and the other artifacts. | |

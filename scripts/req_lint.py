@@ -137,6 +137,8 @@ def check(statement: str) -> tuple[str, list[Finding]]:
         add("R1", "no 'shall' or 'need'" + (f" (uses {', '.join(modals)})" if modals else ""),
             "Use 'The <stakeholders> need the <entity> to ...' or "
             "'The <entity> shall ...'.")
+    if is_req and re.search(r"\bshall\s*[.!?]?\s*$", low):
+        add("R1", "'shall' without an action", "State the action required of the entity.")
     if is_req and len(re.findall(r"\bshall\b", low)) > 1:
         add("R18", "more than one 'shall'", "Split into one statement per obligation.")
     if is_req and re.search(r"\bshall\s+be\s+\w+(ed|en)\b(?:\s+\w+){0,4}\s+\bby\b", low):
@@ -175,9 +177,11 @@ def check(statement: str) -> tuple[str, list[Finding]]:
     if _has_phrase(as_text, "as"):
         temporal.append("as")
     add("R35", temporal, "State the timing explicitly with a value.")
-    has_number = re.search(r"\d", s) is not None
-    if not has_number:
-        add("R34", _phrases(low, UNMEASURED), "Give a measurable target and range.")
+    # A count or reference elsewhere does not quantify this performance term.
+    # Defined performance terms can be masked through --terms; findings still
+    # require contextual review even when a related measurement is present.
+    add("R34", _phrases(low, UNMEASURED),
+        "Check that this performance term has a defined measurable target and range.")
     for m in re.finditer(r"(?<![\w.-])(\d[\d,]*(?:\.\d+)?)(?![\w.-]*-)(\s*)(\S*)", s):
         before = s[max(0, m.start() - 12):m.start()].lower()
         if re.search(r"(§|section|sections|icd|adr|step|phase|stage|level|version|v|http|status|code|gate|rule|table|figure|appendix|chapter|item)\s*$", before):

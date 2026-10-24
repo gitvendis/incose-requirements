@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.1 (2026-10-24)
+
+This release ports the portable corrections from the requirements review pilot.
+
+1. Artifact kind is separate from architectural or organizational level. Classification uses the statement's role and provenance, including justified design constraints.
+2. Typed trace relations distinguish derivation, allocation, satisfaction, decisions, dependencies, evidence and supersession.
+3. Review covers every applicable rule in context. The linter uses partial heuristics; an empty finding list does not prove conformance.
+4. Register guidance checks meaningful values for all 16 starred minimum attributes without imposing a project's schema or inventing values.
+5. Change guidance preserves approval provenance, reviewed revisions and existing authorization. Changed meaning does not inherit prior approval.
+6. The linter flags an incomplete `shall` obligation and performance words even when a number occurs elsewhere. Defined terms remain configurable with `--terms`.
+7. Bounded standard-library regression tests cover these wording cases and CLI behavior. They do not establish INCOSE conformance.
+
 ## 1.1.0 (2026-10-17)
 
 This release corrects the skill against the INCOSE GtWR v4 summary sheet.

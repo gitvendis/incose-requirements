@@ -1,4 +1,4 @@
-# Levels, attributes and a worked example
+# Artifact kinds, entity levels, attributes and a worked example
 
 Paraphrased from the INCOSE Guide to Writing Requirements v4 summary sheet
 (INCOSE-TP-2010-006-04, June 2023). Copyright (c) 2023 by INCOSE. See the
@@ -25,6 +25,12 @@ guidance from this skill, not from the summary sheet.
   definition. The realized element is built and verified to them.
 - **Need expression or requirement expression:** the statement plus its
   attributes.
+
+Artifact kind and entity level are independent. An element can have its own
+needs and design input requirements. Record the entity and architectural or
+organizational level alongside the artifact kind. This distinction does not
+revise the agreed entity scope. GtWR R31 permits a justified design constraint
+in either a need or a requirement; preserve its rationale and approval state.
 
 The life-cycle flow: stakeholder expectations → lifecycle concepts and needs
 definition → integrated set of needs → design input requirements definition →
@@ -67,10 +73,10 @@ They cover each attribute that the summary sheet marks with an asterisk.
 | Column | Attributes | Notes |
 |---|---|---|
 | ID and name | A15, A16 | `N-<area>-NNN`, `DIR-<area>-NNN`, `DOS-<element>-NNN`. Never reuse an ID. |
-| Level and type | A40, R29 | need, design input or design output; function, performance, interface, constraint or quality |
+| Artifact kind, entity level and type | C2, A40, R29 | Record need, design input or design output; the entity and its architectural or organizational level; and function, performance, interface, constraint or quality. Do not infer entity level from artifact kind. |
 | Statement | — | One statement in the agreed pattern. Values not yet agreed are marked TBD or TBR. |
 | Rationale | A1 | Why the entry exists. Put the purpose here, not in the statement (R20). |
-| Parent and source | A2, A3, A32 | Parent IDs; source document, decision or owner direction with date; interface definition reference |
+| Parent and source | A2, A3, A32 | Typed parent derivation, source, decision and interface links; source document or owner direction with date and revision. Keep allocation, satisfaction and dependency distinct (see SKILL.md). |
 | Allocation | A5 | The child entity or the budget share that the entry is allocated to |
 | Verification or validation | A6, A7, A8, A9 | Success criterion, method (test, analysis, inspection, demonstration), who does it |
 | Owner and author | A19, A17 | |
@@ -83,12 +89,20 @@ Keep the system verification and validation results (A13, A14) and the
 implementation status (A31) in the record that owns them. Link to them. Do not
 copy them.
 
+Represent all 16 starred minimum attributes for the applicable expression:
+A1, A2, A3, A5-A9, A15, A17, A19, A28, A29 and A34-A36. A column's presence
+is not proof that its value is meaningful. Shared defaults need an explicit
+inheritance source. Identify missing values and justify any not-applicable
+disposition; do not invent allocation, responsible organization, criticality,
+risk or review results. Follow the project's authority and change process for
+schema changes.
+
 ## How flexibility is managed
 
 Skill convention: do not label requirements "hard" or "soft". The summary
 sheet does not use those terms. Show flexibility with two things:
 
-1. **Level.** A need is the stable anchor. A design input requirement changes
+1. **Artifact kind.** A need is the stable anchor. A design input requirement changes
    only with a recorded reason. A design output specification changes with the
    design.
 2. **Attributes.** Priority (A34), criticality (A35), stability (A26), key
@@ -107,4 +121,4 @@ still need a human review.
 | DIR-BK-001 | When the administrator requests the restore of the project folder, the backup service shall restore the project folder to the state of the most recent nightly backup within 4 hours [TBR]. | Parent N-BK-001. The value is proposed, not agreed, so it is marked TBR. |
 | DIR-BK-002 | The backup service shall retain each nightly backup for 30 days. | Parent N-BK-001. A loss is sometimes found days later. |
 | DIR-BK-003 | The backup service shall store each backup copy at the second site. | Parent N-BK-001. A constraint at the design input level. The rationale (one site fire must not destroy both copies) justifies it under GtWR R31. |
-| DOS-OBJ-001 | The object storage design shall restore the 50 GB reference folder within 2 hours. | Parent DIR-BK-001. If the team picks another design, this entry is replaced. DIR-BK-001 and N-BK-001 stay unchanged. |
+| DOS-OBJ-001 | The object storage design shall restore the 50 GB reference folder within 2 hours. | Satisfaction of DIR-BK-001. If the team picks another design, this entry is replaced. DIR-BK-001 and N-BK-001 stay unchanged. |

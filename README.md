@@ -2,17 +2,17 @@
 
 ![INCOSE Requirements skill: a person and a robot turn a need into a checked requirement](assets/logo.jpg)
 
-This skill helps an AI coding agent write and test needs and requirements. It uses the needs-and-requirements model of INCOSE, the International Council on Systems Engineering. It also uses the 42 rules of the INCOSE Guide to Writing Requirements (GtWR) v4. The skill works with Claude Code and Codex. The current version is 1.1.0.
+This skill helps an AI coding agent write and test needs and requirements. It uses the needs-and-requirements model of INCOSE, the International Council on Systems Engineering. It also uses the 42 rules of the INCOSE Guide to Writing Requirements (GtWR) v4. The skill works with Claude Code and Codex. The current version is 1.1.1.
 
 ## What the skill does
 
-The skill sorts each statement into one of three levels:
+The skill sorts each statement into one of three artifact kinds. It records the entity and its architectural or organizational level separately:
 
-1. A need statement tells what the stakeholders expect. It contains no design.
+1. A need statement tells what the stakeholders expect. It avoids implementation detail unless a recorded rationale justifies a design constraint.
 2. A design input requirement is an obligation on the system that a test can verify.
 3. A design output specification tells what one chosen design must do.
 
-The skill then tests each statement against the GtWR rules and proposes a rewrite. It keeps the trace from each child statement to its parent. If a derived requirement costs too much or cannot be met, the skill changes the child and keeps the parent need.
+The skill then tests each statement against the GtWR rules and proposes a rewrite. It keeps the trace from each child statement to its parent. If a derived requirement costs too much or cannot be met, the skill proposes a revised child and keeps the parent need. It applies authorized changes while preserving the approved revision and review history.
 
 ## Install
 
@@ -36,14 +36,24 @@ Add `--json` for output that a program can read. Add `--strict` to exit with sta
 
 ## Files
 
-The skill has four files. The agent reads `SKILL.md` first and opens the other files when it needs them.
+These files provide the skill instructions and linter. The agent reads `SKILL.md` first and opens the reference files when it needs them.
 
 | File | Contents |
 |---|---|
-| `SKILL.md` | The three levels, the classification questions, the test procedure and the change procedure |
+| `SKILL.md` | Artifact kinds, entity levels, typed trace relations, the classification questions, the test procedure and the change procedure |
 | `references/rules.md` | Characteristics C1 to C15 and rules R1 to R42, with the rules that the linter finds |
-| `references/levels-and-attributes.md` | Definitions, attributes A1 to A49, suggested register columns and a worked example |
+| `references/levels-and-attributes.md` | Artifact kinds and entity levels, definitions, attributes A1 to A49, suggested register columns and a worked example |
 | `scripts/req_lint.py` | The linter |
+
+## Check the linter changes
+
+Run the bounded regression checks with Python's standard library:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+These checks cover demonstrated wording cases and CLI behavior. They do not establish INCOSE conformance.
 
 ## Source and license
 
